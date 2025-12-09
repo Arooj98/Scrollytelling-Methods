@@ -26,3 +26,20 @@
   }
 
 }
+/* OVERRIDE: Make storymap header logo larger on desktop */
+.storymap-logo img,
+#logo img {
+  width: 100%;
+  max-width: 1200px !important;
+  height: auto !important;
+  display: block;
+  margin: 20px auto !important;
+}
+
+.storymap-logo,
+#logo {
+  height: auto !important;
+  line-height: normal !important;
+  text-align: center;
+  padding: 20px 0 !important;
+}
