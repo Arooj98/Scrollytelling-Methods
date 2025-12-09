@@ -26,14 +26,15 @@
   }
 
 }
-/* OVERRIDE: Make storymap header logo larger on desktop */
+/* FIX: Medium-sized logo that doesn’t block scrolling */
 .storymap-logo img,
 #logo img {
-  width: 100%;
-  max-width: 1200px !important;
+  width: auto;
+  max-width: 350px !important;   /* adjust size here */
   height: auto !important;
   display: block;
-  margin: 20px auto !important;
+  margin: 10px auto !important;
+  pointer-events: none;          /* prevents scroll blocking */
 }
 
 .storymap-logo,
@@ -41,5 +42,7 @@
   height: auto !important;
   line-height: normal !important;
   text-align: center;
-  padding: 20px 0 !important;
+  padding: 10px 0 !important;
+  pointer-events: none;          /* container also non-interactive */
 }
+
