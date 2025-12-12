@@ -365,16 +365,39 @@ $(window).on('load', function() {
               }
 
               geoJsonOverlay = L.geoJson(geojson, {
-                style: function(feature) {
-                  return {
-                    fillColor: feature.properties.fillColor || props.fillColor || '#ffffff',
-                    weight: feature.properties.weight || props.weight || 1,
-                    opacity: feature.properties.opacity || props.opacity || 0.5,
-                    color: feature.properties.color || props.color || '#cccccc',
-                    fillOpacity: feature.properties.fillOpacity || props.fillOpacity || 0.5,
-                  }
-                }
-              }).addTo(map);
+  style: function (feature) {
+    return {
+      fillColor: feature.properties.fillColor || props.fillColor || '#ffffff',
+      weight: feature.properties.weight || props.weight || 1,
+      opacity: feature.properties.opacity || props.opacity || 0.5,
+      color: feature.properties.color || props.color || '#cccccc',
+      fillOpacity: feature.properties.fillOpacity || props.fillOpacity || 0.5
+    };
+  },
+
+  // NEW: show value when you hover over a polygon
+  onEachFeature: function (feature, layer) {
+    if (!feature.properties) return;
+
+    // 🔁 CHANGE THIS to your real field name from the GeoJSON
+    // e.g. feature.properties.noise_rate or feature.properties.rate
+    var value = feature.properties.GI;
+
+    // only show tooltip if the field exists and is a number
+    if (typeof value === 'number') {
+      var display = value.toFixed(3);  // format; change if you like
+
+      // optional: if you kept a name field in the GeoJSON
+      var name = feature.properties.name || '';
+
+      layer.bindTooltip(
+        (name ? name + '<br>' : '') + 'Value: ' + display,
+        { sticky: true }   // tooltip follows the mouse
+      );
+    }
+  }
+}).addTo(map);
+
             });
           }
 
