@@ -139,21 +139,6 @@ $(window).on('load', function() {
       }
     }
 
-    var showOnlyActiveMarker = function(k) {
-  for (var i = 0; i < markers.length; i++) {
-    if (!markers[i]) continue;
-
-    // If Marker is Hidden in sheet, keep it hidden always
-    var isHidden = chapters[i] && chapters[i]['Marker'] === 'Hidden';
-    if (isHidden) {
-      markers[i].setOpacity(0);
-      continue;
-    }
-
-    // Show only active marker
-    markers[i].setOpacity(i === k ? 0.9 : 0);
-  }
-};
     var pixelsAbove = [];
     var chapterCount = 0;
 
@@ -324,7 +309,6 @@ $(window).on('load', function() {
 
           currentlyInFocus = i;
           markActiveColor(currentlyInFocus);
-          showOnlyActiveMarker(k);
 
           // Remove overlay tile layer if needed
           if (overlay && map.hasLayer(overlay)) {
